@@ -255,7 +255,7 @@ unquoted_term
     }
 
 term_char
-  = '.' / [^: \t\r\n\f\{\}()"/^~\[\]]
+  = '.' / [^: \t\r\n\f\{\}()"/^\[\]]
 
 quoted_term
   = '"' chars:DoubleStringCharacter* '"' { return chars.join(''); }
