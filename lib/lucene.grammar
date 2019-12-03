@@ -96,7 +96,7 @@ node
             'operator': operator
         };
     }
-  / start:operator_exp left:group_exp operator:operator_exp* right:node*
+  / start:operator_exp left:prefix_group_exp operator:operator_exp* right:node*
     {
         var node = {
             'start': start,
@@ -121,7 +121,7 @@ node
     {
         return right;
     }
-  / left:group_exp operator:operator_exp* right:node*
+  / left:prefix_group_exp operator:operator_exp* right:node*
     {
         var node = {
             'left':left
@@ -141,6 +141,13 @@ node
 
         return node;
     }
+prefix_group_exp
+  = prefix:prefix_operator_exp _* group:group_exp
+    {
+        group['group_prefix'] = prefix
+        return group;
+    }
+  / group_exp
 
 group_exp
   = field_exp:field_exp _*
